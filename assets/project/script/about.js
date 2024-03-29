@@ -3,27 +3,27 @@ const images = [
     {
       label: 'Manoj Shrestha',
       semester : '7th sem',
-      imgPath: '../public/Manoj Shrestha.jpg',
+      imgPath: 'https://sthamanoj.com.np/assets/project/public/Manoj Shrestha.jpg',
     },
     {
       label: 'Usha Gurung',
       semester : '7th sem',
-      imgPath: '../public/Usha Gurung.jpeg',
+      imgPath: 'https://sthamanoj.com.np/assets/project/public/Usha Gurung.jpeg',
     },
     {
       label: 'Pramita Gahatraj',
       semester : '6th sem',
-      imgPath: '../public/Pramita Gahatraj.png',
+      imgPath: 'https://sthamanoj.com.np/assets/project/public/Pramita Gahatraj.png',
     },
     {
       label: 'Prabin Ale',
       semester : '3rd sem',
-      imgPath: '../public/Prabin Ale.png',
+      imgPath: 'https://sthamanoj.com.np/assets/project/public/Prabin Ale.png',
     },
     {
       label: 'Manjib Kumar Batas',
       semester : '1st sem',
-      imgPath: '../public/Manjib Kumar Batas.png',
+      imgPath: 'https://sthamanoj.com.np/assets/project/public/Manjib Kumar Batas.png',
     }
   ];
   
