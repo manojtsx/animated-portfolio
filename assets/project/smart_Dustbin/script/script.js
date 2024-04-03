@@ -5,7 +5,7 @@ setInterval(()=>{
         .then((response) => response.json())
         .then((data) => {
           const garbageLevel = data.v0
-            ? (((28 - data.v0) * 100) / 28).toFixed(2)
+            ? (((23 - data.v0) * 100) / 23).toFixed(2)
             : "N/A";
           if (garbageLevel > 100) {
             document.getElementById(
