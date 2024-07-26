@@ -231,3 +231,13 @@ sr.reveal(`.footer, footer__container`, {
   origin: "bottom",
   distance: "30px",
 });
+
+ // JavaScript to toggle the chatbot visibility
+ document.getElementById('message-icon').addEventListener('click', function() {
+  var chatbotContainer = document.getElementById('chatbot-container');
+  if (chatbotContainer.style.display === 'none' || chatbotContainer.style.display === '') {
+      chatbotContainer.style.display = 'block';
+  } else {
+      chatbotContainer.style.display = 'none';
+  }
+});

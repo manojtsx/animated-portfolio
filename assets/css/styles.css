@@ -356,6 +356,7 @@ body.light-theme {
   gap: 1rem;
 }
 
+
 .home__social,
 .home__scroll {
   position: absolute;
@@ -1216,4 +1217,35 @@ body.light-theme {
     padding: 0.4rem;
     border-radius: 0.5rem;
   }
+}
+
+/* Hide the chatbot container by default */
+#chatbot-container {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 700px;
+  z-index: 1000;
+}
+/* Style for the message icon */
+#message-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1001;
+}
+#message-icon img {
+  width: 30px;
+  height: 30px;
 }
