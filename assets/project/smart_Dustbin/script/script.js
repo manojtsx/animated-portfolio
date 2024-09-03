@@ -1,11 +1,12 @@
 setInterval(()=>{
     fetch(
-        "https://blynk.cloud/external/api/getAll?token=-Suu9pGlY3Kw9uNTWdM726riQP9Ww_jn"
+        "https://sgp1.blynk.cloud/external/api/get?token=-Suu9pGlY3Kw9uNTWdM726riQP9Ww_jn&v0"
       )
         .then((response) => response.json())
         .then((data) => {
-          const garbageLevel = data.v0
-            ? (((23 - data.v0) * 100) / 23).toFixed(2)
+          console.log(data)
+          const garbageLevel = data
+            ? (((23 - data) * 100) / 23).toFixed(2)
             : "N/A";
           if (garbageLevel > 100) {
             document.getElementById(
