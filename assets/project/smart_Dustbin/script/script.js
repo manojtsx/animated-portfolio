@@ -10,7 +10,7 @@ setInterval(() => {
           "The dustbin lid is open";
         document.getElementById("garbageLevel").style.backgroundColor = "yellow";
         return;
-      } else if (data > 23) {
+      } else if (data > 40) {
         document.getElementById("garbageLevel").innerText =
           "The dustbin lid may be open";
         document.getElementById("garbageLevel").style.backgroundColor = "orange";
