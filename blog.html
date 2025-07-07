@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Dynamic Meta Tags (will be updated by JS) -->
+    <meta name="title" content="Blog Post | Manoj Shrestha">
+    <meta name="description" content="Read our latest blog post about web development, SEO, and technology insights.">
+    <meta name="keywords" content="blog, web development, SEO, technology, Manoj Shrestha">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Blog Post | Manoj Shrestha">
+    <meta property="og:description" content="Read our latest blog post about web development, SEO, and technology insights.">
+    <meta property="og:image" content="https://sthamanoj.com.np/assets/img/manoj-shrestha.webp">
+    <meta property="og:url" content="">
+    <meta property="og:site_name" content="Manoj Shrestha">
+    <meta property="article:author" content="Manoj Shrestha">
+    <meta property="article:published_time" content="">
+    <meta property="article:modified_time" content="">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog Post | Manoj Shrestha">
+    <meta name="twitter:description" content="Read our latest blog post about web development, SEO, and technology insights.">
+    <meta name="twitter:image" content="https://sthamanoj.com.np/assets/img/manoj-shrestha.webp">
+    <meta name="twitter:creator" content="@remon.js">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="">
+    
+    <!--=============== FAVICON ===============-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="mask-icon" href="assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="assets/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#a789d4">
+
+    <!--=============== BOXICONS ===============-->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/blog.css">
+
+    <title>Blog Post | Manoj Shrestha</title>
+</head>
+
+<body>
+    <!--=============== HEADER ===============-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">MANOJ</a>
+
+            <div class="nav__menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html#home" class="nav__link">
+                            <i class='bx bx-home'></i>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="index.html#about" class="nav__link">
+                            <i class='bx bx-user'></i>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="index.html#skills" class="nav__link">
+                            <i class='bx bx-book'></i>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="index.html#work" class="nav__link">
+                            <i class='bx bx-briefcase-alt-2'></i>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="index.html#blog" class="nav__link active-link">
+                            <i class='bx bx-news'></i>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="index.html#contact" class="nav__link">
+                            <i class='bx bx-message-square-dots'></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--=============== theme change button ===============-->
+            <i class='bx bx-moon change-theme change-theme-button' id="theme-button"></i>
+        </nav>
+    </header>
+
+    <!--=============== MAIN ===============-->
+    <main class="main">
+        <!--=============== BLOG POST ===============-->
+        <section class="blog-post section">
+            <div class="blog-post__container container">
+                <!-- Loading State -->
+                <div id="blog-loading" class="blog-loading">
+                    <div class="blog-loading__spinner"></div>
+                    <p>Loading blog post...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="blog-error" class="blog-error" style="display: none;">
+                    <i class='bx bx-error-circle'></i>
+                    <h2>Post Not Found</h2>
+                    <p>The blog post you're looking for doesn't exist or has been removed.</p>
+                    <a href="index.html#blog" class="button">Back to Blog</a>
+                </div>
+
+                <!-- Blog Post Content -->
+                <article id="blog-content" class="blog-post__content" style="display: none;">
+                    <!-- Breadcrumb -->
+                    <nav class="blog-breadcrumb">
+                        <a href="index.html">Home</a>
+                        <i class='bx bx-chevron-right'></i>
+                        <a href="index.html#blog">Blog</a>
+                        <i class='bx bx-chevron-right'></i>
+                        <span id="breadcrumb-title">Post</span>
+                    </nav>
+
+                    <!-- Featured Image -->
+                    <div class="blog-post__image-container">
+                        <img id="blog-featured-image" class="blog-post__image" src="" alt="">
+                    </div>
+
+                    <!-- Post Header -->
+                    <header class="blog-post__header">
+                        <h1 id="blog-title" class="blog-post__title"></h1>
+                        <div class="blog-post__meta">
+                            <div class="blog-post__author">
+                                <i class='bx bx-user'></i>
+                                <span id="blog-author">Author</span>
+                            </div>
+                            <div class="blog-post__date">
+                                <i class='bx bx-calendar'></i>
+                                <span id="blog-date">Date</span>
+                            </div>
+                            <div class="blog-post__read-time">
+                                <i class='bx bx-time'></i>
+                                <span id="blog-read-time">5 min read</span>
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- Post Content -->
+                    <div id="blog-body" class="blog-post__body">
+                        <!-- Content will be injected here -->
+                    </div>
+
+                    <!-- Social Share -->
+                    <div class="blog-post__share">
+                        <h3>Share this post:</h3>
+                        <div class="blog-post__share-buttons">
+                            <a href="#" class="blog-share-btn blog-share-btn--facebook" id="share-facebook">
+                                <i class='bx bxl-facebook'></i>
+                                Facebook
+                            </a>
+                            <a href="#" class="blog-share-btn blog-share-btn--twitter" id="share-twitter">
+                                <i class='bx bxl-twitter'></i>
+                                Twitter
+                            </a>
+                            <a href="#" class="blog-share-btn blog-share-btn--linkedin" id="share-linkedin">
+                                <i class='bx bxl-linkedin'></i>
+                                LinkedIn
+                            </a>
+                            <a href="#" class="blog-share-btn blog-share-btn--whatsapp" id="share-whatsapp">
+                                <i class='bx bxl-whatsapp'></i>
+                                WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Back to Blog -->
+                    <div class="blog-post__back">
+                        <a href="index.html#blog" class="button">
+                            <i class='bx bx-arrow-back'></i>
+                            Back to Blog
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!--=============== FOOTER ===============-->
+    <footer class="footer">
+        <div class="footer__container container">
+            <h1 class="footer__title">Manoj Shrestha</h1>
+
+            <ul class="footer__list">
+                <li class="footer__item">
+                    <a href="index.html" class="footer__link">Home</a>
+                </li>
+                <li class="footer__item">
+                    <a href="index.html#about" class="footer__link">About</a>
+                </li>
+                <li class="footer__item">
+                    <a href="index.html#skills" class="footer__link">Skills</a>
+                </li>
+                <li class="footer__item">
+                    <a href="index.html#work" class="footer__link">Work</a>
+                </li>
+                <li class="footer__item">
+                    <a href="index.html#blog" class="footer__link">Blog</a>
+                </li>
+                <li class="footer__item">
+                    <a href="index.html#contact" class="footer__link">Contact</a>
+                </li>
+            </ul>
+
+            <ul class="footer__social">
+                <li class="footer__social-item">
+                    <a href="https://www.facebook.com/manoj.jsx" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-facebook footer__social-icon'></i>
+                    </a>
+                </li>
+                <li class="footer__social-item">
+                    <a href="https://github.com/manojtsx" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-github footer__social-icon'></i>
+                    </a>
+                </li>
+                <li class="footer__social-item">
+                    <a href="https://www.linkedin.com/in/manoj-shrestha-newar/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-linkedin footer__social-icon'></i>
+                    </a>
+                </li>
+                <li class="footer__social-item">
+                    <a href="https://www.instagram.com/remon.js/" target="_blank" class="footer__social-link">
+                        <i class='bx bxl-instagram footer__social-icon'></i>
+                    </a>
+                </li>
+            </ul>
+
+            <span class="footer__copy">
+                &#169; 2023 Manoj. All rights reserved.
+            </span>
+        </div>
+    </footer>
+
+    <!--=============== SCROLLREVEAL ===============-->
+    <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/blog.js"></script>
+</body>
+
+</html>

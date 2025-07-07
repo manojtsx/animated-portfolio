@@ -232,8 +232,104 @@ sr.reveal(`.footer, footer__container`, {
   distance: "30px",
 });
 
- // JavaScript to toggle the chatbot visibility
- document.getElementById('message-icon').addEventListener('click', function() {
+/*=============== BLOG FETCH & PAGINATION ===============*/
+const BLOG_API_URL = 'https://wordpress-fnm8q.wasmer.app/wp-json/wp/v2/posts?_embed';
+const BLOGS_PER_PAGE = 3;
+let blogPosts = [];
+let currentBlogPage = 1;
+
+async function fetchBlogs() {
+  try {
+    const res = await fetch(`${BLOG_API_URL}&per_page=100`);
+    if (!res.ok) throw new Error('Failed to fetch blogs');
+    blogPosts = await res.json();
+    renderBlogPage(1);
+    renderBlogPagination();
+  } catch (err) {
+    document.getElementById('blog-posts').innerHTML = `<p style="color:red">Failed to load blogs.</p>`;
+  }
+}
+
+function renderBlogPage(page) {
+  currentBlogPage = page;
+  const start = (page - 1) * BLOGS_PER_PAGE;
+  const end = start + BLOGS_PER_PAGE;
+  const posts = blogPosts.slice(start, end);
+  const blogPostsContainer = document.getElementById('blog-posts');
+  blogPostsContainer.innerHTML = posts.map(post => {
+    const img = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]?.source_url
+      ? `<img class="blog__image" src="${post._embedded['wp:featuredmedia'][0].source_url}" alt="${post.title.rendered}" loading="lazy">`
+      : '';
+    const date = new Date(post.date).toLocaleDateString();
+    const excerpt = post.excerpt.rendered.replace(/<[^>]+>/g, '').slice(0, 120) + '...';
+    // Use slug for local blog page
+    const slug = post.slug;
+    return `
+      <div class="blog__card">
+        ${img}
+        <div class="blog__content">
+          <div class="blog__meta">${date} | ${post._embedded?.author?.[0]?.name || 'Admin'}</div>
+          <h3 class="blog__title">${post.title.rendered}</h3>
+          <div class="blog__excerpt">${excerpt}</div>
+          <a class="blog__readmore" href="blog.html?slug=${encodeURIComponent(slug)}">Read More</a>
+        </div>
+      </div>
+    `;
+  }).join('');
+  // Animate blog cards
+  if (window.ScrollReveal) {
+    ScrollReveal().reveal('.blog__card', {
+      origin: 'bottom',
+      distance: '40px',
+      duration: 800,
+      interval: 120,
+      reset: false
+    });
+  }
+}
+
+function renderBlogPagination() {
+  const totalPages = Math.ceil(blogPosts.length / BLOGS_PER_PAGE);
+  const pagination = document.getElementById('blog-pagination');
+  if (totalPages <= 1) {
+    pagination.innerHTML = '';
+    return;
+  }
+  let buttons = '';
+  // Prev button
+  buttons += `<button class="blog__page-btn" ${currentBlogPage === 1 ? 'disabled' : ''} data-page="${currentBlogPage - 1}">&laquo;</button>`;
+  // Page numbers (show max 5, with ... if needed)
+  let start = Math.max(1, currentBlogPage - 2);
+  let end = Math.min(totalPages, currentBlogPage + 2);
+  if (currentBlogPage <= 3) end = Math.min(5, totalPages);
+  if (currentBlogPage >= totalPages - 2) start = Math.max(1, totalPages - 4);
+  if (start > 1) buttons += `<span style="padding:0 0.5rem">...</span>`;
+  for (let i = start; i <= end; i++) {
+    buttons += `<button class="blog__page-btn${i === currentBlogPage ? ' active' : ''}" data-page="${i}">${i}</button>`;
+  }
+  if (end < totalPages) buttons += `<span style="padding:0 0.5rem">...</span>`;
+  // Next button
+  buttons += `<button class="blog__page-btn" ${currentBlogPage === totalPages ? 'disabled' : ''} data-page="${currentBlogPage + 1}">&raquo;</button>`;
+  pagination.innerHTML = buttons;
+  // Add event listeners
+  pagination.querySelectorAll('.blog__page-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const page = parseInt(btn.getAttribute('data-page'));
+      if (!isNaN(page) && page >= 1 && page <= totalPages) {
+        renderBlogPage(page);
+        renderBlogPagination();
+        // Scroll to blog section on page change
+        document.getElementById('blog').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+}
+
+// Fetch blogs on DOMContentLoaded
+window.addEventListener('DOMContentLoaded', fetchBlogs);
+
+// JavaScript to toggle the chatbot visibility
+document.getElementById('message-icon').addEventListener('click', function() {
   var chatbotContainer = document.getElementById('chatbot-container');
   if (chatbotContainer.style.display === 'none' || chatbotContainer.style.display === '') {
       chatbotContainer.style.display = 'block';
