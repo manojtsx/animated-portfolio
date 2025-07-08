@@ -323,3 +323,190 @@ body.light-theme .blog-post__body {
 body.light-theme .blog-post__title {
   color: var(--title-color);
 } 
+
+/* --- Responsive improvements for category.html --- */
+
+@media screen and (max-width: 768px) {
+  .blog-breadcrumb {
+    flex-wrap: wrap;
+    font-size: 1rem;
+    gap: 0.25rem;
+    margin-bottom: 1.2rem;
+    word-break: break-word;
+  }
+  .blog-loading, .blog-error {
+    padding: 2rem 0.5rem;
+  }
+  .blog-error i {
+    font-size: 2.5rem;
+  }
+  .blog-error h2 {
+    font-size: 1.3rem;
+  }
+  .blog-post__content, #category-content {
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .blog-breadcrumb {
+    font-size: 0.95rem;
+    gap: 0.15rem;
+    padding: 0.5rem 0.2rem;
+  }
+  .blog-loading__spinner {
+    width: 36px;
+    height: 36px;
+  }
+  .blog-error i {
+    font-size: 2rem;
+  }
+  .blog-error h2 {
+    font-size: 1.1rem;
+  }
+  .blog-post__content, #category-content {
+    padding: 0.5rem 0.1rem;
+  }
+  .button {
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+/* Make sure blog grid is always responsive */
+#category-content.blog__container {
+  display: grid;
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+/* Improve touch targets for links/buttons in category */
+.blog-breadcrumb a, .button {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+} 
+
+/* --- Modern, unified responsive grid for category.html --- */
+#category-content.blog__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+  width: 100%;
+  justify-items: stretch;
+}
+
+/* --- Refined card/content styling for category.js output --- */
+.blog__card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--container-color);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.blog__card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.blog__image, .blog__card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 1.25rem 1.25rem 0 0;
+  margin: 0;
+  display: block;
+}
+
+.blog__content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 1rem 1rem 1rem;
+  background: none;
+}
+
+.blog__meta {
+  font-size: 0.95rem;
+  color: var(--text-color-light);
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+}
+
+.blog__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--title-color);
+  word-break: break-word;
+}
+
+.blog__excerpt {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 0.7rem;
+  word-break: break-word;
+  flex: 1 1 auto;
+}
+
+.blog__readmore {
+  color: var(--first-color);
+  font-weight: 600;
+  text-decoration: none;
+  margin-top: auto;
+  align-self: flex-start;
+  border-radius: 0.4rem;
+  transition: background 0.2s, color 0.2s;
+  font-size: 0.98rem;
+}
+.blog__readmore:hover {
+  background: var(--first-color);
+  color: #fff;
+}
+
+@media screen and (max-width: 900px) {
+  .blog__image, .blog__card img {
+    height: 140px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .blog__image, .blog__card img {
+    height: 110px;
+  }
+  .blog__content {
+    padding: 0.8rem 0.5rem 0.7rem 0.5rem;
+  }
+}
+
+/* Center the Back to Categories button below the grid */
+#category-content + div[style] {
+  text-align: center !important;
+  margin-top: 2rem !important;
+}
+
+@media screen and (max-width: 900px) {
+  #category-content.blog__container {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  #category-content.blog__container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .category-header {
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+  }
+  .blog__card img {
+    height: 140px;
+  }
+} 

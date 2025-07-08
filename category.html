@@ -44,7 +44,8 @@
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/blog.css">
+    <!-- <link rel="stylesheet" href="assets/css/blog.css"> -->
+    <link rel="stylesheet" href="assets/css/categories.css">
 
     <title>Category | Manoj Shrestha</title>
 </head>
@@ -99,14 +100,14 @@
             <i class='bx bx-moon change-theme change-theme-button' id="theme-button"></i>
         </nav>
     </header>
-
+    
     <!--=============== MAIN ===============-->
     <main class="main">
         <!--=============== CATEGORY BLOG ===============-->
         <section class="blog section" id="blog">
-            <div class="blog__container container">
+            <div class=" container">
                 <!-- Breadcrumb -->
-                <nav class="blog-breadcrumb">
+                <nav class="categories-breadcrumb">
                     <a href="index.html">Home</a>
                     <i class='bx bx-chevron-right'></i>
                     <a href="index.html#blog">Blog</a>
@@ -117,10 +118,10 @@
                 </nav>
 
                 <!-- Category Header -->
-                <div class="category-header">
+                <div class="categories__header">
                     <span class="section__subtitle">Category</span>
                     <h2 class="section__title" id="category-title">Loading...</h2>
-                    <p class="category-description" id="category-description">
+                    <p class="categories__description" id="category-description">
                         Browse all posts in this category.
                     </p>
                 </div>
@@ -214,8 +215,8 @@
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 
     <!--=============== MAIN JS ===============-->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/category.js"></script>
+    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/category.js"></script>
 </body>
 
 </html> 

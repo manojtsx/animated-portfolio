@@ -292,3 +292,57 @@ body.light-theme .category-card__title {
 body.light-theme .category-card__description {
   color: var(--text-color);
 } 
+
+/* --- Fixes for category.html using categories classes --- */
+.categories__header {
+  width: 100%;
+  max-width: 100%;
+  margin: 2rem 0 1.5rem 0;
+  text-align: left;
+  align-items: flex-start;
+  display: block;
+}
+
+.categories__description {
+  text-align: center;
+}
+
+.categories__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.categories__grid > * {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Center the Back to Categories button below the grid */
+#category-content + div[style],
+.categories__grid + div[style] {
+  text-align: center !important;
+  margin-top: 2rem !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 900px) {
+  .categories__grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+}
+@media screen and (max-width: 600px) {
+  .categories__header {
+    margin: 1.2rem 0 1rem 0;
+    padding: 0 0.5rem;
+  }
+  .categories__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+} 

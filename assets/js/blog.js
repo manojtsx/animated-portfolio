@@ -1,6 +1,5 @@
 /*=============== BLOG POST PAGE FUNCTIONALITY ===============*/
-
-const BLOG_API_BASE = 'https://wordpress-fnm8q.wasmer.app/wp-json/wp/v2/posts';
+const BLOG_API_BASE = `https://wordpress-inuw7.wasmer.app/wp-json/wp/v2/posts`;
 let currentPost = null;
 
 // Get slug from URL parameters
@@ -144,7 +143,14 @@ function setupSocialSharing(post) {
 // Fetch blog post by slug
 async function fetchBlogPost(slug) {
   try {
-    const response = await fetch(`${BLOG_API_BASE}?slug=${encodeURIComponent(slug)}&_embed`);
+    const response = await fetch(
+      `${BLOG_API_BASE}?slug=${encodeURIComponent(slug)}&_embed`,
+      {
+        headers: {
+          'Authorization': 'Basic ' + btoa('admin:ed25 esqw UNYW ezUN vtWX WQ1M')
+        }
+      }
+    );
     
     if (!response.ok) {
       throw new Error('Failed to fetch blog post');

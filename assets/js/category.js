@@ -1,9 +1,10 @@
 /*=============== CATEGORY PAGE FUNCTIONALITY ===============*/
-
-const CATEGORY_API_BASE = 'https://wordpress-fnm8q.wasmer.app/wp-json/wp/v2/posts';
-const CATEGORIES_API_BASE = 'https://wordpress-fnm8q.wasmer.app/wp-json/wp/v2/categories';
+const CATEGORY_API_BASE = `https://wordpress-inuw7.wasmer.app/wp-json/wp/v2/posts`;
+const CATEGORIES_API_BASE = `https://wordpress-inuw7.wasmer.app/wp-json/wp/v2/categories`;
 let categoryPosts = [];
 let currentCategory = null;
+let currentPage = 1;
+const POSTS_PER_PAGE = 10;
 
 // Get category slug from URL parameters
 function getCategorySlugFromURL() {
@@ -70,7 +71,12 @@ async function fetchCategoryPosts(categoryId) {
 function renderCategoryGrid() {
   const posts = categoryPosts;
   const categoryContent = document.getElementById('category-content');
-  
+  const pagination = document.getElementById('category-pagination');
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const startIdx = (currentPage - 1) * POSTS_PER_PAGE;
+  const endIdx = startIdx + POSTS_PER_PAGE;
+  const pagePosts = posts.slice(startIdx, endIdx);
+
   if (posts.length === 0) {
     categoryContent.innerHTML = `
       <div class="blog-empty">
@@ -79,14 +85,14 @@ function renderCategoryGrid() {
         <p>No posts found in this category yet.</p>
       </div>
     `;
+    if (pagination) pagination.innerHTML = '';
   } else {
-    categoryContent.innerHTML = posts.map(post => {
+    categoryContent.innerHTML = pagePosts.map(post => {
       const img = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]?.source_url
         ? `<img class="blog__image" src="${post._embedded['wp:featuredmedia'][0].source_url}" alt="${post.title.rendered}" loading="lazy">`
         : '';
       const date = new Date(post.date).toLocaleDateString();
       const excerpt = post.excerpt.rendered.replace(/<[^>]+>/g, '').slice(0, 120) + '...';
-      
       return `
         <div class="blog__card">
           ${img}
@@ -99,6 +105,7 @@ function renderCategoryGrid() {
         </div>
       `;
     }).join('');
+    renderPagination(totalPages);
   }
   // Animate blog cards
   if (window.ScrollReveal) {
@@ -110,6 +117,42 @@ function renderCategoryGrid() {
       reset: false
     });
   }
+}
+
+function renderPagination(totalPages) {
+  let pagination = document.getElementById('category-pagination');
+  if (!pagination) {
+    pagination = document.createElement('div');
+    pagination.id = 'category-pagination';
+    pagination.className = 'categories__pagination';
+    document.getElementById('category-content').after(pagination);
+  }
+  if (totalPages <= 1) {
+    pagination.innerHTML = '';
+    return;
+  }
+  let html = '';
+  if (currentPage > 1) {
+    html += `<button class="categories__page-btn" data-page="${currentPage - 1}">Prev</button>`;
+  }
+  for (let i = 1; i <= totalPages; i++) {
+    html += `<button class="categories__page-btn${i === currentPage ? ' active' : ''}" data-page="${i}">${i}</button>`;
+  }
+  if (currentPage < totalPages) {
+    html += `<button class="categories__page-btn" data-page="${currentPage + 1}">Next</button>`;
+  }
+  pagination.innerHTML = html;
+  // Add event listeners
+  Array.from(pagination.querySelectorAll('.categories__page-btn')).forEach(btn => {
+    btn.onclick = (e) => {
+      const page = parseInt(btn.getAttribute('data-page'));
+      if (!isNaN(page) && page !== currentPage) {
+        currentPage = page;
+        renderCategoryGrid();
+        window.scrollTo({ top: document.getElementById('category-content').offsetTop - 80, behavior: 'smooth' });
+      }
+    };
+  });
 }
 
 // Initialize category page

@@ -233,7 +233,7 @@ sr.reveal(`.footer, footer__container`, {
 });
 
 /*=============== BLOG FETCH & PAGINATION ===============*/
-const BLOG_API_URL = 'https://wordpress-fnm8q.wasmer.app/wp-json/wp/v2/posts?_embed';
+const BLOG_API_URL = `https://wordpress-inuw7.wasmer.app/wp-json/wp/v2/posts?_embed`;
 const BLOGS_PER_PAGE = 3;
 let blogPosts = [];
 let currentBlogPage = 1;
@@ -301,8 +301,8 @@ function renderBlogPagination() {
   // Page numbers (show max 5, with ... if needed)
   let start = Math.max(1, currentBlogPage - 2);
   let end = Math.min(totalPages, currentBlogPage + 2);
-  if (currentBlogPage <= 3) end = Math.min(5, totalPages);
-  if (currentBlogPage >= totalPages - 2) start = Math.max(1, totalPages - 4);
+  if (currentBlogPage <= 4) end = Math.min(4, totalPages);
+  if (currentBlogPage >= totalPages - 3) start = Math.max(1, totalPages - 3);
   if (start > 1) buttons += `<span style="padding:0 0.5rem">...</span>`;
   for (let i = start; i <= end; i++) {
     buttons += `<button class="blog__page-btn${i === currentBlogPage ? ' active' : ''}" data-page="${i}">${i}</button>`;
