@@ -510,3 +510,7 @@ body.light-theme .blog-post__title {
     height: 140px;
   }
 } 
+
+.uagb-faq-icon-wrap {
+  display: none;
+}
