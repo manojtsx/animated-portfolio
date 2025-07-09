@@ -337,3 +337,41 @@ document.getElementById('message-icon').addEventListener('click', function() {
       chatbotContainer.style.display = 'none';
   }
 });
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("assets/js/sw.js").then(
+      (registration) => {
+        console.log("Service Worker registered: ", registration);
+      },
+      (err) => {
+        console.log("Service Worker registration failed: ", err);
+      }
+    );
+  });
+}
+
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Show a custom install button
+  const installBtn = document.getElementById("installBtn");
+  installBtn.style.display = "block";
+
+  installBtn.addEventListener("click", () => {
+    installBtn.style.display = "none";
+    deferredPrompt.prompt();
+
+    deferredPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === "accepted") {
+        console.log("User accepted the install prompt");
+      } else {
+        console.log("User dismissed the install prompt");
+      }
+      deferredPrompt = null;
+    });
+  });
+});
