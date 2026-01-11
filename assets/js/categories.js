@@ -1,6 +1,6 @@
 /*=============== CATEGORIES PAGE FUNCTIONALITY ===============*/
-const CATEGORIES_API_BASE = `https://wordpress-inuw7.wasmer.app/wp-json/wp/v2/categories`;
-const POSTS_API_BASE = `https://wordpress-inuw7.wasmer.app/wp-json/wp/v2/posts`;
+const CATEGORIES_API_BASE = `https://blog.sthamanoj.com.np/wp-json/wp/v2/categories`;
+const POSTS_API_BASE = `https://blog.sthamanoj.com.np/wp-json/wp/v2/posts`;
 
 // Category icons mapping
 const categoryIcons = {

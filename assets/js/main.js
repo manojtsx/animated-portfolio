@@ -233,7 +233,7 @@ sr.reveal(`.footer, footer__container`, {
 });
 
 /*=============== BLOG FETCH & PAGINATION ===============*/
-const BLOG_API_URL = `https://wordpress-inuw7.wasmer.app/wp-json/wp/v2/posts?_embed`;
+const BLOG_API_URL = `https://blog.sthamanoj.com.np/wp-json/wp/v2/posts?_embed`;
 const BLOGS_PER_PAGE = 3;
 let blogPosts = [];
 let currentBlogPage = 1;

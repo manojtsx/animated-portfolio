@@ -1,6 +1,6 @@
 /*=============== CATEGORY PAGE FUNCTIONALITY ===============*/
-const CATEGORY_API_BASE = `https://wordpress-inuw7.wasmer.app/wp-json/wp/v2/posts`;
-const CATEGORIES_API_BASE = `https://wordpress-inuw7.wasmer.app/wp-json/wp/v2/categories`;
+const CATEGORY_API_BASE = `https://blog.sthamanoj.com.npp/wp-json/wp/v2/posts`;
+const CATEGORIES_API_BASE = `https://blog.sthamanoj.com.np/wp-json/wp/v2/categories`;
 let categoryPosts = [];
 let currentCategory = null;
 let currentPage = 1;
